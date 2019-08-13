@@ -1,1 +1,1 @@
-# micro_service
+### go_micro_service template
