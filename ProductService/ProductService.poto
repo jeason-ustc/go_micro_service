@@ -1,0 +1,76 @@
+// protocol buffer 语法版本
+syntax = "proto3";
+
+// 产品服务定义
+service ProductService {
+    // 添加产品
+    rpc AddProduct (AddProductRequest) returns (AddProductResponse) {
+    }
+
+    // 删除产品
+    rpc DeleteProduct (DeleteProductRequest) returns (EmptyResponse) {
+    }
+
+    // 根据产品Id查询产品详情
+    rpc QueryProductInfo (QueryProductRequest) returns (ProductInfoResponse) {
+
+    }
+
+    // 查询所有产品详情
+    rpc QueryProductsInfo (EmptyRequest) returns (ProductsInfoResponse) {
+
+    }
+}
+// 请求/响应结构体定义
+// 添加产品message
+message AddProductRequest {
+    enum Classfication {
+        FRUIT = 0;
+        MEAT = 1;
+        STAPLE = 2;
+        TOILETRIES = 3;
+        DRESS = 4;
+    }
+    string productName = 1;
+    Classfication classification = 2;
+    string manufacturerId = 3;
+    double weight = 4;
+    int64 productionDate = 5;
+}
+
+// 添加产品，服务端响应message
+message AddProductResponse {
+    string productId = 1;
+    string message = 2;
+}
+
+// 删除产品message
+message DeleteProductRequest {
+    string productId = 1;
+}
+
+message QueryProductRequest {
+    string productId = 1;
+}
+
+// 单产品详情message
+message ProductInfoResponse {
+    string productName = 1;
+    string productId = 2;
+    string manufacturerId = 3;
+    double weight = 4;
+    int64 productionDate = 5;
+    int64 importDate = 6;
+}
+
+message ProductsInfoResponse {
+    repeated ProductInfoResponse infos = 1;
+}
+
+message EmptyRequest {
+
+}
+
+message EmptyResponse {
+
+}
